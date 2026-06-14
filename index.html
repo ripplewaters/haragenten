@@ -1,0 +1,805 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atti &amp; Winnie Håragenten — Linköping. Sedan 1993.</title>
+  <meta name="description" content="Atti &amp; Winnie Håragenten — anrik frisörsalong i centrala Linköping sedan 1993. Tävlingsmeriterade frisörer, Mästarbrev, Redken-salong.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ---------- TOKENS ---------- */
+    :root {
+      --bg:        #0A0A0A;
+      --fg:        #F4F3F1;
+      --muted:     rgba(244, 243, 241, 0.55);
+      --hairline:  rgba(244, 243, 241, 0.15);
+      --display:   'Instrument Serif', Georgia, serif;
+      --body:      'Inter', system-ui, sans-serif;
+      --gutter:    clamp(1.25rem, 4vw, 3rem);
+      --section-y: clamp(5rem, 10vw, 9rem);
+      --accent:    #C5A572;   /* muted champagne — warm metallic */
+    }
+
+    /* ---------- RESET ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--body);
+      font-weight: 400;
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+
+    /* ---------- UTILITIES ---------- */
+    .label {
+      font-family: var(--body);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .hairline { border: 0; height: 1px; background: var(--hairline); margin: 0; }
+    .hairline--cut {
+      border: 0;
+      height: 1px;
+      margin: 0;
+      background-image: linear-gradient(
+        to right,
+        rgba(244, 243, 241, 0.25) 0,
+        rgba(244, 243, 241, 0.25) 8px,
+        transparent 8px,
+        transparent 16px
+      );
+      background-size: 16px 1px;
+      background-repeat: repeat-x;
+      background-position: left center;
+    }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+    /* ---------- NAV ---------- */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.25rem var(--gutter);
+      mix-blend-mode: difference;
+      color: #fff;
+    }
+    .nav__brand {
+      font-family: var(--display);
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      text-transform: none;
+      color: inherit;
+      line-height: 1;
+    }
+    .nav__brand-amp {
+      font-style: italic;
+      margin: 0 0.05em;
+    }
+    .nav__phone { font-family: var(--body); font-size: 0.75rem; letter-spacing: 0.18em; font-weight: 500; }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background-image: url('images/aw-header-desktop.png');
+      background-size: cover;
+      background-position: center center;
+      display: flex;
+      align-items: flex-end;
+      padding: var(--gutter);
+      padding-top: 6rem;
+      padding-bottom: 4rem;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg,
+        rgba(10,10,10,0.88) 0%,
+        rgba(10,10,10,0.65) 45%,
+        rgba(10,10,10,0.2) 100%);
+      pointer-events: none;
+    }
+    .hero__inner { position: relative; max-width: 55%; }
+    .hero__eyebrow { margin-bottom: 2rem; }
+    .hero__title {
+      font-family: var(--display);
+      letter-spacing: -0.02em;
+      margin: 0 0 1.5rem;
+      color: var(--fg);
+    }
+    .hero__title-1 {
+      display: block;
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: clamp(3.5rem, 9vw, 9rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+    }
+    .hero__title-2 {
+      display: block;
+      font-weight: 400;
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      padding-left: 0;
+      margin-top: 0.5rem;
+      opacity: 0.9;
+    }
+    .hero__title-2-serif {
+      font-family: var(--display);
+      font-weight: 400;
+      font-style: italic;
+    }
+    .hero__title-2-thin {
+      font-family: var(--body);
+      font-weight: 200;
+      font-style: normal;
+    }
+    .hero__body {
+      max-width: 36ch;
+      font-size: 1rem;
+      line-height: 1.55;
+      color: rgba(244,243,241,0.85);
+      margin: 0 0 2.5rem;
+    }
+    .cta {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.35rem 3rem;
+      font-family: var(--body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #1A1208;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      overflow: hidden;
+      isolation: isolate;
+      background: linear-gradient(
+        135deg,
+        #B8935A 0%,
+        #D4B068 18%,
+        #F0D898 38%,
+        #E5C57E 50%,
+        #C9A361 72%,
+        #A88245 100%
+      );
+      box-shadow:
+        0 1px 0 rgba(255, 235, 180, 0.6) inset,
+        0 -1px 0 rgba(0, 0, 0, 0.3) inset,
+        0 12px 32px -8px rgba(184, 147, 90, 0.5),
+        0 4px 12px -2px rgba(0, 0, 0, 0.4);
+      transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                  box-shadow 400ms ease;
+    }
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 75%;
+      height: 100%;
+      background: linear-gradient(
+        115deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0) 30%,
+        rgba(255, 255, 255, 0.45) 50%,
+        rgba(255, 255, 255, 0) 70%,
+        transparent 100%
+      );
+      transform: skewX(-20deg);
+      pointer-events: none;
+      z-index: 1;
+      animation: shimmer 4.5s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0%   { left: -100%; }
+      50%  { left: 150%; }
+      100% { left: 150%; }
+    }
+    .cta__arrow, .cta > * { position: relative; z-index: 2; }
+    .cta__arrow { margin-left: 0.75rem; display: inline-block; transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+    .cta:hover, .cta:focus-visible {
+      transform: translateY(-2px);
+      box-shadow:
+        0 1px 0 rgba(255, 245, 200, 0.8) inset,
+        0 -1px 0 rgba(0, 0, 0, 0.35) inset,
+        0 20px 40px -8px rgba(212, 176, 104, 0.6),
+        0 8px 20px -4px rgba(0, 0, 0, 0.5);
+    }
+    .cta:hover .cta__arrow, .cta:focus-visible .cta__arrow { transform: translateX(6px); }
+    .cta:active {
+      transform: translateY(0);
+      box-shadow:
+        0 1px 0 rgba(255, 235, 180, 0.5) inset,
+        0 -1px 0 rgba(0, 0, 0, 0.3) inset,
+        0 4px 12px -2px rgba(184, 147, 90, 0.4),
+        0 2px 6px -2px rgba(0, 0, 0, 0.4);
+    }
+
+    /* ---------- TICKER ---------- */
+    .ticker {
+      background: var(--bg);
+      color: rgba(244, 243, 241, 0.55);
+      overflow: hidden;
+      border-top: 1px solid rgba(244, 243, 241, 0.1);
+      border-bottom: 1px solid rgba(244, 243, 241, 0.1);
+    }
+    .ticker__track {
+      display: flex;
+      gap: 3rem;
+      padding: 1.25rem 0;
+      white-space: nowrap;
+      animation: scroll 35s linear infinite;
+      font-family: var(--body);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    .ticker__track span { display: inline-flex; align-items: center; gap: 3rem; }
+    .ticker__track span::after { content: '◆'; font-size: 0.6rem; color: var(--accent); }
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ---------- SECTION ---------- */
+    .section { padding: var(--section-y) var(--gutter); position: relative; }
+    .section__head { display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem; margin-bottom: 3rem; max-width: 64rem; }
+    .section__num { font-family: var(--body); font-size: 0.8rem; letter-spacing: 0.18em; color: var(--muted); font-weight: 500; }
+    .section__title {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin: 0;
+      max-width: 18ch;
+    }
+
+    /* ---------- MERITER ---------- */
+    .meriter {
+      padding: 4rem var(--gutter);
+      border-top: 1px solid rgba(244, 243, 241, 0.1);
+      border-bottom: 1px solid rgba(244, 243, 241, 0.1);
+    }
+    .meriter__row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2rem;
+      max-width: 80rem;
+      margin: 0 auto;
+    }
+    .meriter__item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      text-align: center;
+    }
+    .meriter__year {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      color: var(--accent);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .meriter__label {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: rgba(244, 243, 241, 0.55);
+      font-weight: 500;
+    }
+
+    /* ---------- PRICELIST ---------- */
+    .prices { max-width: 64rem; margin: 0 auto; }
+    .prices__group-label {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 4rem;
+      margin-bottom: 2rem;
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.24em;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .prices__group-label:first-child { margin-top: 0; }
+    .prices__group-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background-image: linear-gradient(
+        to right,
+        rgba(197, 165, 114, 0.35) 0,
+        rgba(197, 165, 114, 0.35) 8px,
+        transparent 8px,
+        transparent 16px
+      );
+      background-size: 16px 1px;
+      background-repeat: repeat-x;
+      background-position: left center;
+    }
+    .prices__row {
+      display: grid;
+      grid-template-columns: 5rem 1fr auto;
+      gap: 2rem;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--hairline);
+      transition: opacity 250ms ease;
+      align-items: start;
+    }
+    .prices__duration {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-top: 0.5rem;
+      transition: color 200ms ease;
+    }
+    .prices__name { font-size: 1.1rem; font-weight: 400; }
+    .prices__desc {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: rgba(244, 243, 241, 0.55);
+      line-height: 1.45;
+      margin-top: 0.5rem;
+      max-width: 42ch;
+    }
+    .prices__price { font-family: var(--body); font-size: 0.95rem; letter-spacing: 0.18em; font-weight: 500; white-space: nowrap; padding-top: 0.5rem; }
+    .prices__cta { margin-top: 2.5rem; }
+    .prices__cta a {
+      font-family: var(--body);
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      font-weight: 500;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(244, 243, 241, 0.2);
+      padding-bottom: 4px;
+      transition: all 300ms ease;
+    }
+    .prices__cta a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* ---------- TEAM ---------- */
+    .team { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 80rem; margin: 0 auto; }
+    .team__card:nth-child(2) { transform: translateY(7rem); }
+    .team__img {
+      width: 100%; aspect-ratio: 3/4; object-fit: cover;
+      filter: grayscale(18%) contrast(1.02);
+      transition: filter 400ms ease;
+    }
+    .team__card:hover .team__img { filter: grayscale(0) contrast(1); }
+    .team__name { font-family: var(--display); font-size: 1.5rem; font-weight: 400; letter-spacing: -0.02em; margin: 1.5rem 0 0.5rem; }
+    .team__bio { font-size: 0.95rem; line-height: 1.6; color: rgba(244,243,241,0.8); margin: 0; }
+
+    /* ---------- PRAKTISKT ---------- */
+    .praktiskt { background: var(--bg); position: relative; }
+    .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; max-width: 80rem; margin: 0 auto; position: relative; }
+    .info-grid h3 { font-family: var(--body); font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin: 0 0 1rem; font-weight: 500; }
+    .info-grid p, .info-grid a { font-size: 1.05rem; line-height: 1.55; margin: 0; }
+    .info-grid a { border-bottom: 1px solid rgba(244, 243, 241, 0.2); padding-bottom: 2px; transition: all 300ms ease; }
+    .info-grid a:hover { border-bottom-color: var(--accent); color: var(--accent); }
+
+    /* ---------- EDITORIAL IMAGE ---------- */
+    .editorial {
+      width: 100%; height: 80vh;
+      background-image: url('images/aw-footer-desktop.png');
+      background-size: cover;
+      background-position: center top;
+    }
+
+    /* ---------- MONOGRAM ---------- */
+    .monogram {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 3.5rem;
+      height: 3.5rem;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      font-family: var(--display);
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      padding-top: 0.1rem;
+      flex-shrink: 0;
+    }
+    .monogram__amp {
+      font-style: italic;
+      margin: 0 0.05em;
+      font-size: 1.1em;
+      display: inline-block;
+      transform: translateY(-0.03em);
+    }
+    .monogram--footer { width: 4rem; height: 4rem; font-size: 1.55rem; }
+    .monogram--hero {
+      width: 5rem;
+      height: 5rem;
+      font-size: 1.95rem;
+      margin-bottom: 2.5rem;
+    }
+    .monogram--nav {
+      width: 2.25rem;
+      height: 2.25rem;
+      font-size: 0.95rem;
+      border-color: rgba(255, 255, 255, 0.7);
+      color: rgba(255, 255, 255, 0.85);
+      transition: border-color 300ms ease, color 300ms ease;
+    }
+    .nav__brand:hover .monogram--nav {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .monogram-divider {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem var(--gutter);
+    }
+
+    /* ---------- FOOTER ---------- */
+    .footer {
+      padding: 3rem var(--gutter) 2rem;
+      border-top: 1px solid var(--hairline);
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 2rem; flex-wrap: wrap;
+      font-family: var(--body); font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500;
+      color: var(--muted);
+    }
+    .footer a:hover { color: var(--fg); }
+
+    /* ---------- REVEAL ---------- */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 700ms ease, transform 700ms ease; }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    /* ---------- HOVER (pointer devices, desktop) ---------- */
+    @media (hover: hover) and (min-width: 1024px) {
+      .prices:hover .prices__row { opacity: 0.35; }
+      .prices:hover .prices__row:hover { opacity: 1; }
+      .prices:hover .prices__row:hover .prices__duration { color: var(--fg); }
+    }
+    @media (hover: hover) {
+      .monogram--footer { transition: transform 800ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+      .footer:hover .monogram--footer { transform: rotate(8deg); }
+    }
+
+    /* ---------- MOBILE ---------- */
+    @media (max-width: 1023px) {
+      .hero {
+        background-image: url('images/aw-mobile-header.png');
+        background-position: center center;
+        align-items: flex-end;
+      }
+      .hero::before {
+        background: linear-gradient(180deg, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.85) 85%);
+      }
+      .hero__inner { max-width: 100%; }
+      .monogram--hero {
+        width: 4rem;
+        height: 4rem;
+        font-size: 1.55rem;
+        margin-bottom: 2rem;
+      }
+      .hero__title-1 {
+        font-size: clamp(4.5rem, 16vw, 7rem);
+        line-height: 0.95;
+        letter-spacing: -0.03em;
+      }
+      .hero__title-2 {
+        margin-top: 0.5rem;
+        font-size: clamp(1.25rem, 4.5vw, 1.75rem);
+        letter-spacing: -0.01em;
+        padding-left: 0;
+      }
+      .nav__brand { font-size: 1rem; }
+      .nav__phone { display: none; }
+      .meriter__row { grid-template-columns: repeat(2, 1fr); gap: 2.5rem 1.5rem; }
+      .meriter__row .meriter__item:last-child { grid-column: 1 / -1; }
+      .meriter__year { font-size: clamp(1.5rem, 7vw, 2rem); }
+      .editorial {
+        height: 70vh;
+        background-image: url('images/aw-mobile-footer.png');
+        background-position: center center;
+      }
+      .team { grid-template-columns: 1fr; gap: 4rem; }
+      .team__card:nth-child(2) { transform: none; }
+      .info-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer { flex-direction: column; align-items: flex-start; }
+      .prices__row { grid-template-columns: 1fr auto; }
+      .prices__duration { grid-column: 1; grid-row: 1; padding-top: 0; margin-bottom: 0.4rem; }
+      .prices__row > div { grid-column: 1; grid-row: 2; }
+      .prices__price { grid-column: 2; grid-row: 1 / 3; align-self: start; }
+      .prices__group-label { gap: 1rem; }
+      .cta { padding: 1.2rem 2.5rem; font-size: 0.74rem; }
+    }
+
+    /* ---------- REDUCED MOTION ---------- */
+    @media (prefers-reduced-motion: reduce) {
+      .ticker__track { animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .cta::before { animation: none; opacity: 0; }
+      * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" aria-label="Primär">
+    <a class="nav__brand" href="#top">Atti <span class="nav__brand-amp">&amp;</span> Winnie</a>
+    <a class="nav__phone" href="tel:013130847">013-13 08 47</a>
+  </nav>
+
+  <!-- HERO -->
+  <header id="top" class="hero">
+    <div class="hero__inner">
+      <span class="monogram monogram--hero" aria-label="Atti och Winnie">A<span class="monogram__amp">&amp;</span>W</span>
+      <p class="label hero__eyebrow">Sedan 1993 — Storgatan 29, Linköping</p>
+      <h1 class="hero__title">
+        <span class="hero__title-1">Håragenten</span>
+        <span class="hero__title-2"><span class="hero__title-2-serif">Världsklass</span><span class="hero__title-2-thin"> — mitt i Linköping.</span></span>
+      </h1>
+      <p class="hero__body">
+        Linköping kanske är litet på världskartan. Men hos oss får du klippning
+        och hårvård lika bra som i Stockholm, London eller New York. Våga eller
+        klassiskt.
+      </p>
+      <a class="cta" href="https://haragenten.valei.com/" target="_blank" rel="noopener">Boka tid<span class="cta__arrow">→</span></a>
+    </div>
+  </header>
+
+  <!-- MERITER -->
+  <section class="meriter" aria-label="Meriter och utmärkelser">
+    <div class="meriter__row">
+      <div class="meriter__item">
+        <span class="meriter__year">1993</span>
+        <span class="meriter__label">Grundad</span>
+      </div>
+      <div class="meriter__item">
+        <span class="meriter__year">★</span>
+        <span class="meriter__label">Mästarbrev</span>
+      </div>
+      <div class="meriter__item">
+        <span class="meriter__year">SFM</span>
+        <span class="meriter__label">Svenska Frisyrmoderådet</span>
+      </div>
+      <div class="meriter__item">
+        <span class="meriter__year">FF</span>
+        <span class="meriter__label">Frisörföretagarna</span>
+      </div>
+      <div class="meriter__item">
+        <span class="meriter__year">NYC</span>
+        <span class="meriter__label">Redken-salong</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 BEHANDLINGAR -->
+  <section class="section" id="behandlingar">
+    <div class="section__head reveal">
+      <span class="section__num">Behandlingar</span>
+      <h2 class="section__title">Klippning, färg<br>och hårvård.</h2>
+    </div>
+
+    <div class="prices reveal">
+
+      <div class="prices__group-label">Klippning</div>
+
+      <div class="prices__row">
+        <span class="prices__duration">30 MIN</span>
+        <div>
+          <span class="prices__name">Klippning, 30 min</span>
+          <span class="prices__desc">Konsultation, tvätt och klippning.</span>
+        </div>
+        <span class="prices__price">från 750 kr</span>
+      </div>
+      <div class="prices__row">
+        <span class="prices__duration">45 MIN</span>
+        <div>
+          <span class="prices__name">Klippning, 45 min</span>
+          <span class="prices__desc">Konsultation, tvätt, klippning och styling.</span>
+        </div>
+        <span class="prices__price">från 830 kr</span>
+      </div>
+      <div class="prices__row">
+        <span class="prices__duration">30 MIN</span>
+        <div>
+          <span class="prices__name">Barnklippning</span>
+          <span class="prices__desc">För barn upp till 12 år.</span>
+        </div>
+        <span class="prices__price">från 560 kr</span>
+      </div>
+
+      <div class="prices__group-label">Färg</div>
+
+      <div class="prices__row">
+        <span class="prices__duration">~2 TIM</span>
+        <div>
+          <span class="prices__name">Färg utväxt, inkl. klippning</span>
+          <span class="prices__desc">Påläggning vid hårbotten, klippning ingår.</span>
+        </div>
+        <span class="prices__price">från 2 580 kr</span>
+      </div>
+      <div class="prices__row">
+        <span class="prices__duration">~3 TIM</span>
+        <div>
+          <span class="prices__name">Färg / slingor, inkl. klippning</span>
+          <span class="prices__desc">Foliering eller frihandsteknik, klippning ingår.</span>
+        </div>
+        <span class="prices__price">från 2 800 kr</span>
+      </div>
+      <div class="prices__row">
+        <span class="prices__duration">~3 TIM</span>
+        <div>
+          <span class="prices__name">Färg avancerad, inkl. klippning</span>
+          <span class="prices__desc">Balayage, blondering eller flerstegsfärg, klippning ingår.</span>
+        </div>
+        <span class="prices__price">från 2 880 kr</span>
+      </div>
+
+      <div class="prices__group-label">Vård &amp; Tillägg</div>
+
+      <div class="prices__row">
+        <span class="prices__duration">+15 MIN</span>
+        <div>
+          <span class="prices__name">ABC Inpackning</span>
+          <span class="prices__desc">Djupgående hårinpackning, läggs till vid klippning eller färg.</span>
+        </div>
+        <span class="prices__price">från 280 kr</span>
+      </div>
+      <div class="prices__row">
+        <span class="prices__duration">KONSULT</span>
+        <div>
+          <span class="prices__name">Hairtalk löshår</span>
+          <span class="prices__desc">Tejp-extensions för längd eller volym. Bokas efter konsultation.</span>
+        </div>
+        <span class="prices__price">Kräver konsultation</span>
+      </div>
+
+      <p class="prices__cta">
+        <a href="https://haragenten.valei.com/" target="_blank" rel="noopener">
+          Se alla tjänster &amp; boka →
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <hr class="hairline--cut">
+
+  <!-- 02 MÄNNISKORNA -->
+  <section class="section" id="atti-winnie">
+    <div class="section__head reveal">
+      <span class="section__num">Människorna</span>
+      <h2 class="section__title">Atti &amp; Winnie.<br>Sedan dag ett.</h2>
+    </div>
+
+    <div class="team">
+      <article class="team__card reveal">
+        <img class="team__img" src="images/attie-headshot.png" alt="Porträtt av Atti">
+        <h3 class="team__name">Atti</h3>
+        <p class="team__bio">
+          Tävlingsklippte med stora framgångar redan innan hon var klar på
+          frisörskolan; nationella och internationella topplaceringar i
+          portföljen. Startade Håragenten 1993 tillsammans med Winnie. Aktiv i
+          Svenska Frisyrmoderådet, examinator i utbildningsnämnden, och
+          innehavare av Mästarbrev.
+        </p>
+      </article>
+
+      <article class="team__card reveal">
+        <img class="team__img" src="images/winne-headshot.png" alt="Porträtt av Winnie">
+        <h3 class="team__name">Winnie</h3>
+        <p class="team__bio">
+          Tävlingsfrisör, främst på herrsidan, sedan junioråren. Salongens
+          sociala mittpunkt. Engagerad i Svenska Frisyrmoderådet och
+          Frisörföretagarna, och jobbar för Frisörföretagarna Sverige med att
+          utveckla branschen.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <hr class="hairline--cut">
+
+  <div class="monogram-divider">
+    <span class="monogram" aria-label="Atti och Winnie">
+      A<span class="monogram__amp">&amp;</span>W
+    </span>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+      <span>Sedan 1993</span><span>Mästarbrev</span><span>Tävlingsmeriterad</span><span>Redken-salong</span>
+      <span>Sedan 1993</span><span>Mästarbrev</span><span>Tävlingsmeriterad</span><span>Redken-salong</span>
+    </div>
+  </div>
+
+  <!-- 03 PRAKTISKT -->
+  <section class="section praktiskt" id="praktiskt">
+    <div class="section__head reveal">
+      <span class="section__num">Praktiskt</span>
+      <h2 class="section__title">Hitta hit.<br>Boka tid.</h2>
+    </div>
+
+    <div class="info-grid reveal">
+      <div>
+        <h3>Adress</h3>
+        <p>
+          <a href="https://www.google.se/maps?q=Storgatan+29,+582+23,+Linköping" target="_blank" rel="noopener">
+            Storgatan 29<br>582 23 Linköping
+          </a>
+        </p>
+      </div>
+      <div>
+        <h3>Öppettider</h3>
+        <p>[ Öppettider — fylls i ]</p>
+      </div>
+      <div>
+        <h3>Kontakt &amp; boka</h3>
+        <p>
+          <a href="tel:013130847">013-13 08 47</a><br>
+          <a href="https://haragenten.valei.com/" target="_blank" rel="noopener">haragenten.valei.com</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDITORIAL IMAGE -->
+  <div class="editorial" role="img" aria-label="Atti och Winnie i salongen"></div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span class="monogram monogram--footer" aria-label="Atti och Winnie Håragenten">
+      A<span class="monogram__amp">&amp;</span>W
+    </span>
+    <span>© Atti &amp; Winnie Håragenten</span>
+    <span>Storgatan 29, Linköping · 013-13 08 47</span>
+    <a href="https://haragenten.valei.com/" target="_blank" rel="noopener">Boka tid →</a>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+
+</body>
+</html>
